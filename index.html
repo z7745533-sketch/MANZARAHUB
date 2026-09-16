@@ -2,686 +2,1429 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0b12">
-<meta name="description" content="MANZARAHUB - Her gün yeni bir fotoğraf challenge'ı.">
-<title>MANZARAHUB 📸</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#090b0f">
+
+<meta name="description"
+content="MANZARAHUB - Günlük fotoğraf challenge'larına katıl, XP kazan ve fotoğraf dünyasını keşfet.">
+
+<meta name="keywords"
+content="fotoğraf, fotoğraf challenge, fotoğraf yarışması, manzara, fotoğraf topluluğu">
+
+<title>MANZARAHUB — Fotoğraf Challenge Platformu</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
 :root{
- --bg:#08080e;
- --card:#11111a;
- --card2:#171722;
- --text:#fff;
- --muted:#9b9bab;
- --line:#252533;
- --purple:#8b5cf6;
- --pink:#ec4899;
- --blue:#38bdf8;
+    --bg:#080a0d;
+    --panel:#101318;
+    --panel2:#151920;
+    --border:#252a32;
+    --text:#f5f7fa;
+    --muted:#8e97a4;
+    --green:#45d483;
+    --yellow:#f2c94c;
 }
 
 body{
- font-family:Inter,Arial,sans-serif;
- background:
- radial-gradient(circle at 10% 0%,#28134d,transparent 30%),
- radial-gradient(circle at 100% 20%,#40122f,transparent 28%),
- var(--bg);
- color:var(--text);
- min-height:100vh;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font:inherit;
 }
 
 button{
- font:inherit;
- cursor:pointer;
- border:0;
+    cursor:pointer;
 }
 
-.nav{
- height:72px;
- border-bottom:1px solid var(--line);
- display:flex;
- align-items:center;
- justify-content:space-between;
- padding:0 5%;
- position:sticky;
- top:0;
- z-index:20;
- background:#08080edb;
- backdrop-filter:blur(18px);
+header{
+    height:72px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(8,10,13,.94);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+}
+
+.navbar{
+    max-width:1250px;
+    height:100%;
+    margin:auto;
+    padding:0 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .logo{
- font-size:21px;
- font-weight:900;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:2px;
 }
 
 .logo span{
- background:linear-gradient(90deg,#a78bfa,#f472b6);
- -webkit-background-clip:text;
- color:transparent;
+    color:#858e9a;
 }
 
-.navlinks{
- display:flex;
- gap:6px;
+.nav{
+    display:flex;
+    gap:5px;
 }
 
-.navlinks button{
- background:transparent;
- color:var(--muted);
- padding:10px 13px;
- border-radius:12px;
+.nav button{
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    padding:10px 13px;
+    border-radius:8px;
 }
 
-.navlinks button:hover,
-.navlinks button.active{
- background:var(--card2);
- color:#fff;
+.nav button:hover,
+.nav button.active{
+    background:#171b21;
+    color:white;
 }
 
-.profile{
- display:flex;
- align-items:center;
- gap:8px;
- background:var(--card);
- border:1px solid var(--line);
- color:#fff;
- padding:7px 12px 7px 7px;
- border-radius:14px;
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.icon-btn{
+    width:38px;
+    height:38px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:#101318;
+    color:white;
+}
+
+.profile-mini{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    border:1px solid var(--border);
+    background:#101318;
+    padding:6px 10px;
+    border-radius:9px;
 }
 
 .avatar{
- width:31px;
- height:31px;
- display:grid;
- place-items:center;
- border-radius:50%;
- background:linear-gradient(135deg,var(--purple),var(--pink));
+    width:31px;
+    height:31px;
+    border-radius:50%;
+    background:#29303a;
+    display:grid;
+    place-items:center;
+    font-weight:bold;
+    font-size:12px;
 }
+
+.profile-mini small{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.mobile-menu{
+    display:none;
+    background:none;
+    border:0;
+    color:white;
+    font-size:24px;
+}
+
+/* NOTIFICATIONS */
+
+.notification-box{
+    display:none;
+    position:fixed;
+    right:20px;
+    top:80px;
+    width:320px;
+    background:#101318;
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:15px;
+    z-index:300;
+    box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+
+.notification-box.open{
+    display:block;
+}
+
+.notification-title{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:13px;
+}
+
+.notification-title strong{
+    font-size:14px;
+}
+
+.notification-title span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.notification{
+    border:1px solid var(--border);
+    padding:12px;
+    border-radius:9px;
+    margin-top:8px;
+    background:#13171c;
+}
+
+.notification strong{
+    font-size:12px;
+    display:block;
+}
+
+.notification p{
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
+    line-height:1.4;
+}
+
+/* MAIN */
 
 main{
- width:min(1120px,92%);
- margin:35px auto 70px;
+    max-width:1250px;
+    margin:auto;
+    padding:35px 20px 70px;
 }
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+/* HERO */
 
 .hero{
- display:grid;
- grid-template-columns:1.15fr .85fr;
- gap:20px;
+    min-height:430px;
+    border:1px solid var(--border);
+    border-radius:22px;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:flex-end;
+
+    background:
+    radial-gradient(circle at 78% 25%,rgba(255,255,255,.12),transparent 22%),
+    radial-gradient(circle at 30% 75%,rgba(120,130,145,.12),transparent 28%),
+    linear-gradient(135deg,#151a20,#06080a 70%);
 }
 
-.challenge{
- border:1px solid var(--line);
- border-radius:28px;
- padding:35px;
- background:
- linear-gradient(145deg,#241442aa,#15101dcc 60%,#11111a);
- overflow:hidden;
- position:relative;
+.hero-lines{
+    position:absolute;
+    inset:0;
+    opacity:.13;
+
+    background-image:
+    linear-gradient(#fff 1px,transparent 1px),
+    linear-gradient(90deg,#fff 1px,transparent 1px);
+
+    background-size:55px 55px;
 }
 
-.challenge:after{
- content:"";
- position:absolute;
- width:220px;
- height:220px;
- border-radius:50%;
- background:#8b5cf622;
- right:-70px;
- top:-70px;
- filter:blur(10px);
+.hero-content{
+    position:relative;
+    z-index:2;
+    padding:43px;
+    max-width:720px;
 }
 
-.badge{
- display:inline-block;
- padding:7px 11px;
- border-radius:999px;
- background:#8b5cf61f;
- color:#c4b5fd;
- font-size:12px;
- font-weight:800;
- margin-bottom:18px;
+.eyebrow{
+    display:inline-block;
+    padding:7px 10px;
+    border-radius:7px;
+    background:#151920;
+    border:1px solid #303640;
+    color:#adb5c0;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:1px;
+    margin-bottom:18px;
 }
 
-h1{
- font-size:clamp(42px,6vw,72px);
- line-height:.95;
- letter-spacing:-4px;
+.hero h1{
+    font-size:clamp(42px,7vw,76px);
+    line-height:.94;
+    letter-spacing:-4px;
 }
 
-.gradient{
- background:linear-gradient(90deg,#c4b5fd,#f9a8d4);
- -webkit-background-clip:text;
- color:transparent;
+.hero p{
+    margin-top:20px;
+    max-width:560px;
+    color:#a2aab5;
+    line-height:1.7;
 }
 
-.sub{
- color:var(--muted);
- line-height:1.65;
- margin:19px 0 25px;
- max-width:600px;
+.hero-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:28px;
 }
 
-.cta{
- background:#fff;
- color:#111;
- padding:14px 20px;
- border-radius:14px;
- font-weight:900;
- transition:.2s;
+.primary{
+    padding:13px 18px;
+    border-radius:9px;
+    border:1px solid white;
+    background:white;
+    color:#080a0d;
+    font-weight:bold;
 }
 
-.cta:hover{
- transform:translateY(-2px);
- box-shadow:0 10px 30px #0007;
+.primary:disabled{
+    background:#20252c;
+    border-color:#303640;
+    color:#858e9a;
+    cursor:not-allowed;
 }
+
+.secondary{
+    padding:13px 18px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:#151920;
+    color:white;
+    font-weight:bold;
+}
+
+/* STATS */
 
 .stats{
- display:flex;
- gap:10px;
- flex-wrap:wrap;
- margin-top:25px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin:15px 0 42px;
 }
 
 .stat{
- background:#ffffff09;
- border:1px solid #ffffff10;
- border-radius:14px;
- padding:11px 14px;
-}
-
-.stat b{
- display:block;
+    padding:18px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    border-radius:12px;
 }
 
 .stat small{
- color:var(--muted);
+    color:var(--muted);
+    display:block;
+    font-size:10px;
+    margin-bottom:8px;
 }
 
-.preview{
- border:1px solid var(--line);
- border-radius:28px;
- background:linear-gradient(145deg,#191923,#0e0e14);
- padding:20px;
+.stat strong{
+    font-size:20px;
 }
 
-.photo{
- height:270px;
- border-radius:21px;
- overflow:hidden;
- position:relative;
- background:
- radial-gradient(circle at 75% 20%,#fff4b8 0 7%,transparent 8%),
- linear-gradient(145deg,#101936,#344b7c 50%,#f59e0b);
-}
-
-.photo:after{
- content:"";
- position:absolute;
- left:-30px;
- right:-30px;
- bottom:-70px;
- height:160px;
- background:#080d19;
- transform:rotate(-5deg);
-}
-
-.photo-label{
- position:absolute;
- z-index:2;
- bottom:15px;
- left:15px;
- background:#0009;
- padding:8px 11px;
- border-radius:11px;
- font-size:12px;
-}
-
-.preview-info{
- display:flex;
- justify-content:space-between;
- margin-top:16px;
-}
-
-.muted{
- color:var(--muted);
- font-size:13px;
-}
-
-.section{
- margin-top:45px;
-}
+/* SECTIONS */
 
 .section-head{
- display:flex;
- justify-content:space-between;
- align-items:end;
- margin-bottom:17px;
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:18px;
 }
 
 .section-head h2{
- font-size:25px;
+    font-size:22px;
 }
 
 .section-head p{
- color:var(--muted);
- font-size:13px;
- margin-top:4px;
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
 }
 
-.cards{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:14px;
+/* CHALLENGES */
+
+.challenge-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
 }
 
-.card{
- background:var(--card);
- border:1px solid var(--line);
- border-radius:20px;
- overflow:hidden;
- transition:.2s;
+.challenge{
+    border:1px solid var(--border);
+    background:var(--panel);
+    border-radius:15px;
+    overflow:hidden;
+    transition:.2s;
 }
 
-.card:hover{
- transform:translateY(-4px);
- border-color:#39394c;
+.challenge:hover{
+    transform:translateY(-3px);
+    border-color:#3a414b;
 }
 
-.card-img{
- height:170px;
+.cover{
+    height:150px;
+    background:
+    radial-gradient(circle at 25% 30%,#707985,transparent 17%),
+    radial-gradient(circle at 75% 65%,#303944,transparent 23%),
+    linear-gradient(135deg,#202832,#080a0d);
 }
 
-.one{background:linear-gradient(135deg,#f59e0b,#7c2d12)}
-.two{background:linear-gradient(135deg,#064e3b,#34d399)}
-.three{background:linear-gradient(135deg,#312e81,#a78bfa)}
-.four{background:linear-gradient(135deg,#0369a1,#38bdf8)}
-.five{background:linear-gradient(135deg,#be185d,#fb7185)}
-.six{background:linear-gradient(135deg,#4338ca,#60a5fa)}
-
-.card-body{
- padding:15px;
+.challenge:nth-child(2) .cover{
+    background:
+    radial-gradient(circle at 70% 25%,#7a838d,transparent 18%),
+    linear-gradient(135deg,#171c22,#333a43);
 }
 
-.card-body b{
- display:block;
- margin-bottom:8px;
+.challenge:nth-child(3) .cover{
+    background:
+    radial-gradient(circle at 40% 50%,#5b6570,transparent 20%),
+    linear-gradient(135deg,#080a0d,#272e36);
 }
 
-.meta{
- color:var(--muted);
- font-size:13px;
- display:flex;
- justify-content:space-between;
+.challenge:nth-child(4) .cover{
+    background:
+    radial-gradient(circle at 50% 35%,#717a84,transparent 18%),
+    linear-gradient(135deg,#252b33,#090b0e);
 }
 
-.leaderboard{
- display:grid;
- gap:10px;
+.challenge:nth-child(5) .cover{
+    background:
+    radial-gradient(circle at 30% 60%,#59636e,transparent 22%),
+    linear-gradient(135deg,#10151a,#313943);
 }
 
-.player{
- display:flex;
- align-items:center;
- gap:12px;
- padding:13px;
- border:1px solid var(--line);
- background:var(--card);
- border-radius:16px;
+.challenge:nth-child(6) .cover{
+    background:
+    radial-gradient(circle at 75% 40%,#68727e,transparent 20%),
+    linear-gradient(135deg,#090c10,#252c34);
+}
+
+.challenge-body{
+    padding:18px;
+}
+
+.tag{
+    color:#aeb6c2;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.challenge h3{
+    margin:7px 0;
+    font-size:17px;
+}
+
+.challenge p{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.5;
+}
+
+.challenge-footer{
+    border-top:1px solid var(--border);
+    margin-top:16px;
+    padding-top:13px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.challenge-footer span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+.small{
+    border:0;
+    border-radius:7px;
+    background:white;
+    color:#080a0d;
+    padding:8px 12px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.small:disabled{
+    background:#1e2923;
+    color:var(--green);
+}
+
+/* PANELS */
+
+.two{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:15px;
+    margin-top:40px;
+}
+
+.panel{
+    border:1px solid var(--border);
+    background:var(--panel);
+    border-radius:15px;
+    padding:20px;
+}
+
+.panel-title{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:16px;
+}
+
+.panel-title strong{
+    font-size:15px;
+}
+
+.panel-title span{
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* LEADERBOARD */
+
+.leader{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.leader:last-child{
+    border:0;
 }
 
 .rank{
- width:30px;
- text-align:center;
- font-weight:900;
+    width:24px;
+    color:var(--muted);
+    font-size:11px;
 }
 
-.player-avatar{
- width:38px;
- height:38px;
- border-radius:50%;
- display:grid;
- place-items:center;
- background:linear-gradient(135deg,#6366f1,#ec4899);
+.leader-avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#282e36;
+    display:grid;
+    place-items:center;
+    font-size:11px;
+    font-weight:bold;
 }
 
-.player-info{
- flex:1;
+.leader-info{
+    flex:1;
 }
 
-.player-info small{
- color:var(--muted);
+.leader-info strong{
+    display:block;
+    font-size:12px;
 }
 
-.xp{
- font-weight:900;
- color:#c4b5fd;
+.leader-info small{
+    color:var(--muted);
+    font-size:10px;
 }
+
+.leader-xp{
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* BADGES */
 
 .badges{
- display:flex;
- gap:12px;
- flex-wrap:wrap;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
 }
 
-.badge-card{
- min-width:125px;
- flex:1;
- padding:20px 14px;
- text-align:center;
- background:var(--card);
- border:1px solid var(--line);
- border-radius:18px;
+.badge{
+    background:#13171c;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px;
 }
 
-.badge-card span{
- display:block;
- font-size:31px;
- margin-bottom:8px;
+.badge-icon{
+    font-size:20px;
+    margin-bottom:8px;
 }
 
-.badge-card small{
- color:var(--muted);
+.badge strong{
+    display:block;
+    font-size:11px;
 }
 
-footer{
- border-top:1px solid var(--line);
- text-align:center;
- color:var(--muted);
- padding:28px;
+.badge small{
+    color:var(--muted);
+    font-size:9px;
 }
+
+/* SEARCH */
+
+.search-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.search{
+    flex:1;
+    border:1px solid var(--border);
+    background:#101318;
+    color:white;
+    border-radius:9px;
+    padding:13px;
+    outline:none;
+}
+
+.search:focus{
+    border-color:#4a515d;
+}
+
+.select{
+    border:1px solid var(--border);
+    background:#101318;
+    color:white;
+    border-radius:9px;
+    padding:0 14px;
+}
+
+/* PROFILE */
+
+.profile-card{
+    max-width:720px;
+    margin:auto;
+}
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding-bottom:25px;
+    border-bottom:1px solid var(--border);
+}
+
+.big-avatar{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    background:#292f37;
+    display:grid;
+    place-items:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.level{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:6px;
+}
+
+.progress{
+    height:7px;
+    background:#262b32;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:12px;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    background:white;
+    width:0%;
+}
+
+/* NOTIFICATION BUTTON */
+
+.notification-permission{
+    margin-top:20px;
+    padding:15px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#13171c;
+}
+
+.notification-permission p{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.5;
+    margin:7px 0 12px;
+}
+
+/* TOAST */
 
 .toast{
- position:fixed;
- left:50%;
- bottom:25px;
- transform:translate(-50%,100px);
- background:#fff;
- color:#111;
- padding:13px 18px;
- border-radius:13px;
- font-weight:800;
- transition:.3s;
- z-index:50;
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translate(-50%,20px);
+    opacity:0;
+    pointer-events:none;
+    background:white;
+    color:#080a0d;
+    padding:12px 17px;
+    border-radius:9px;
+    font-size:12px;
+    font-weight:bold;
+    z-index:999;
+    transition:.25s;
 }
 
 .toast.show{
- transform:translate(-50%,0);
+    opacity:1;
+    transform:translate(-50%,0);
 }
 
-@media(max-width:800px){
- .navlinks{display:none}
- .hero{grid-template-columns:1fr}
- .cards{grid-template-columns:repeat(2,1fr)}
+/* FOOTER */
+
+footer{
+    text-align:center;
+    border-top:1px solid var(--border);
+    color:#68717d;
+    padding:28px 15px;
+    font-size:10px;
+    line-height:1.7;
 }
 
-@media(max-width:520px){
- main{margin-top:22px}
- .challenge{padding:25px;border-radius:22px}
- h1{letter-spacing:-2px}
- .cards{grid-template-columns:1fr}
- .photo{height:230px}
+/* MOBILE */
+
+@media(max-width:850px){
+
+    .nav{
+        display:none;
+        position:absolute;
+        left:0;
+        right:0;
+        top:72px;
+        padding:10px 20px 15px;
+        background:#0c0f13;
+        border-bottom:1px solid var(--border);
+        flex-direction:column;
+    }
+
+    .nav.open{
+        display:flex;
+    }
+
+    .nav button{
+        text-align:left;
+    }
+
+    .profile-mini{
+        display:none;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .challenge-grid{
+        grid-template-columns:1fr;
+    }
+
+    .two{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        min-height:450px;
+    }
+
+    .hero-content{
+        padding:28px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .search-row{
+        flex-direction:column;
+    }
+
+    .select{
+        height:45px;
+    }
 }
+
+@media(max-width:480px){
+
+    main{
+        padding:22px 14px 55px;
+    }
+
+    .navbar{
+        padding:0 14px;
+    }
+
+    .stats{
+        gap:8px;
+    }
+
+    .stat{
+        padding:14px;
+    }
+
+    .stat strong{
+        font-size:16px;
+    }
+
+    .notification-box{
+        left:14px;
+        right:14px;
+        width:auto;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<header class="nav">
+<header>
+
+<div class="navbar">
 
 <div class="logo">
-📸 <span>MANZARAHUB</span>
+MANZARA<span>HUB</span>
 </div>
 
-<nav class="navlinks">
-<button class="active" onclick="go('home')">Ana Sayfa</button>
-<button onclick="go('discover')">Keşfet</button>
-<button onclick="go('leaderboard')">🏆 Sıralama</button>
-<button onclick="go('badges')">🎖️ Rozetler</button>
+<nav class="nav" id="nav">
+
+<button class="active"
+onclick="showPage('home',this)">
+Ana Sayfa
+</button>
+
+<button onclick="showPage('discover',this)">
+Keşfet
+</button>
+
+<button onclick="showPage('ranking',this)">
+Sıralama
+</button>
+
+<button onclick="showPage('badges',this)">
+Rozetler
+</button>
+
+<button onclick="showPage('profile',this)">
+Profil
+</button>
+
 </nav>
 
-<button class="profile" onclick="changeName()">
-<div class="avatar">👤</div>
-<span id="name">Misafir</span>
+<div class="header-actions">
+
+<button
+class="icon-btn"
+onclick="toggleNotifications()">
+🔔
 </button>
+
+<div class="profile-mini">
+
+<div class="avatar" id="headerAvatar">
+M
+</div>
+
+<div>
+<strong id="headerName">
+Misafir
+</strong>
+
+<br>
+
+<small>
+<span id="headerXP">0</span> XP
+</small>
+
+</div>
+
+</div>
+
+<button
+class="mobile-menu"
+onclick="toggleMenu()">
+☰
+</button>
+
+</div>
+
+</div>
 
 </header>
 
-<main id="home">
 
-<section class="hero">
+<!-- BİLDİRİMLER -->
 
-<div class="challenge">
+<div
+class="notification-box"
+id="notificationBox">
 
-<div class="badge">🔥 GÜNÜN CHALLENGE'I</div>
+<div class="notification-title">
 
-<h1>
-Maviyi
-<span class="gradient">yakala.</span>
-</h1>
+<strong>Bildirimler</strong>
 
-<p class="sub">
-Bugün çevrende mavi olan ilginç bir şeyi bul.
-Fotoğrafını çek ve MANZARAHUB topluluğuna katıl.
-Yaratıcılığını göster!
+<span>MANZARAHUB</span>
+
+</div>
+
+<div class="notification">
+
+<strong>Günün Challenge'ı</strong>
+
+<p>
+Bugünün challenge'ı hazır.
+Maviyi yakalamaya ne dersin?
 </p>
 
-<button class="cta" onclick="joinChallenge()">
-🚀 Challenge'a Katıl
+</div>
+
+<div class="notification">
+
+<strong>Yeni görev</strong>
+
+<p>
+Yarın yeni bir fotoğraf challenge'ı açılacak.
+</p>
+
+</div>
+
+</div>
+
+
+<main>
+
+
+<!-- ANA SAYFA -->
+
+<section
+id="home"
+class="page active">
+
+<div class="hero">
+
+<div class="hero-lines"></div>
+
+<div class="hero-content">
+
+<div class="eyebrow">
+BUGÜNÜN FOTOĞRAF GÖREVİ
+</div>
+
+<h1>
+Maviyi<br>
+yakala.
+</h1>
+
+<p>
+Bugünün temasını kendi bakış açınla yorumla.
+Challenge'a katıl, XP kazan ve fotoğraf
+topluluğunun bir parçası ol.
+</p>
+
+<div class="hero-actions">
+
+<button
+id="joinBtn"
+class="primary"
+onclick="joinToday()">
+Challenge'a Katıl · +50 XP
 </button>
+
+<button
+class="secondary"
+onclick="showPage('discover')">
+Challenge'ları Keşfet
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 
 <div class="stats">
 
 <div class="stat">
-<b>+50 XP</b>
-<small>Ödül</small>
+<small>SEVİYE</small>
+<strong id="levelStat">1</strong>
 </div>
 
 <div class="stat">
-<b>12.483</b>
-<small>Katılımcı</small>
+<small>XP</small>
+<strong id="xpStat">0</strong>
 </div>
 
 <div class="stat">
-<b>23:41</b>
-<small>Kalan</small>
+<small>SERİ</small>
+<strong>🔥 <span id="streakStat">1</span></strong>
+</div>
+
+<div class="stat">
+<small>BUGÜNKÜ KATILIM</small>
+<strong id="joinStatus">Hazır</strong>
 </div>
 
 </div>
 
-</div>
-
-<div class="preview">
-
-<div class="photo">
-<div class="photo-label">
-✨ Günün örnek teması
-</div>
-</div>
-
-<div class="preview-info">
-
-<div>
-<b>Maviyi yakala 💙</b>
-<div class="muted">
-Challenge #001
-</div>
-</div>
-
-<div class="muted">
-Yarın yeni görev
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<section class="section" id="discover">
 
 <div class="section-head">
+
 <div>
-<h2>🔥 Popüler Challenge'lar</h2>
-<p>MANZARAHUB topluluğunun en çok katıldığı görevler</p>
-</div>
-</div>
-
-<div class="cards">
-
-<div class="card">
-<div class="card-img one"></div>
-<div class="card-body">
-<b>🌅 Gün batımını yakala</b>
-<div class="meta">
-<span>+40 XP</span>
-<span>8.2K katılım</span>
-</div>
-</div>
-</div>
-
-<div class="card">
-<div class="card-img two"></div>
-<div class="card-body">
-<b>🌿 Doğadan bir kare</b>
-<div class="meta">
-<span>+35 XP</span>
-<span>6.7K katılım</span>
-</div>
-</div>
-</div>
-
-<div class="card">
-<div class="card-img three"></div>
-<div class="card-body">
-<b>🌙 Gece ışıkları</b>
-<div class="meta">
-<span>+50 XP</span>
-<span>9.1K katılım</span>
-</div>
-</div>
-</div>
-
-<div class="card">
-<div class="card-img four"></div>
-<div class="card-body">
-<b>🌊 Mavi dünya</b>
-<div class="meta">
-<span>+45 XP</span>
-<span>5.8K katılım</span>
-</div>
-</div>
-</div>
-
-<div class="card">
-<div class="card-img five"></div>
-<div class="card-body">
-<b>🌈 Renk patlaması</b>
-<div class="meta">
-<span>+30 XP</span>
-<span>4.4K katılım</span>
-</div>
-</div>
-</div>
-
-<div class="card">
-<div class="card-img six"></div>
-<div class="card-body">
-<b>🏙️ Şehir ışıkları</b>
-<div class="meta">
-<span>+40 XP</span>
-<span>7.3K katılım</span>
-</div>
-</div>
+<h2>Popüler Challenge'lar</h2>
+<p>Topluluk için hazırlanan görevler</p>
 </div>
 
 </div>
 
-</section>
 
+<div class="challenge-grid">
 
-<section class="section" id="leaderboard">
+<article class="challenge">
 
-<div class="section-head">
-<div>
-<h2>🏆 Haftanın liderleri</h2>
-<p>En çok XP kazananlar</p>
-</div>
-</div>
+<div class="cover"></div>
 
-<div class="leaderboard">
+<div class="challenge-body">
 
-<div class="player">
-<div class="rank">🥇</div>
-<div class="player-avatar">🧑</div>
-<div class="player-info">
-<b>FotoKral</b>
-<small>34 challenge</small>
-</div>
-<div class="xp">2.840 XP</div>
+<div class="tag">
+DOĞA
 </div>
 
-<div class="player">
-<div class="rank">🥈</div>
-<div class="player-avatar">👩</div>
-<div class="player-info">
-<b>LensQueen</b>
-<small>29 challenge</small>
-</div>
-<div class="xp">2.510 XP</div>
-</div>
+<h3>
+Gökyüzünün Tonları
+</h3>
 
-<div class="player">
-<div class="rank">🥉</div>
-<div class="player-avatar">🧑‍🎨</div>
-<div class="player-info">
-<b>PixelArt</b>
-<small>27 challenge</small>
-</div>
-<div class="xp">2.240 XP</div>
+<p>
+Gökyüzünü farklı bir açıdan yakala.
+</p>
+
+<div class="challenge-footer">
+
+<span>
++40 XP · 2 gün
+</span>
+
+<button
+class="small"
+onclick="joinExtra(this,'Gökyüzünün Tonları')">
+Katıl
+</button>
+
 </div>
 
 </div>
 
-</section>
+</article>
 
 
-<section class="section" id="badges">
+<article class="challenge">
 
-<div class="section-head">
-<div>
-<h2>🎖️ Rozetler</h2>
-<p>Challenge'ları tamamla, rozetleri aç</p>
+<div class="cover"></div>
+
+<div class="challenge-body">
+
+<div class="tag">
+ŞEHİR
 </div>
+
+<h3>
+Gece Işıkları
+</h3>
+
+<p>
+Şehrin gece atmosferini keşfet.
+</p>
+
+<div class="challenge-footer">
+
+<span>
++40 XP · 1 gün
+</span>
+
+<button
+class="small"
+onclick="joinExtra(this,'Gece Işıkları')">
+Katıl
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="challenge">
+
+<div class="cover"></div>
+
+<div class="challenge-body">
+
+<div class="tag">
+DETAY
+</div>
+
+<h3>
+Yakından Bak
+</h3>
+
+<p>
+Günlük hayattaki küçük detayları bul.
+</p>
+
+<div class="challenge-footer">
+
+<span>
++30 XP · 3 gün
+</span>
+
+<button
+class="small"
+onclick="joinExtra(this,'Yakından Bak')">
+Katıl
+</button>
+
+</div>
+
+</div>
+
+</article>
+
+</div>
+
+
+<div class="two">
+
+<div class="panel">
+
+<div class="panel-title">
+
+<strong>
+Haftanın Sıralaması
+</strong>
+
+<span>
+Demo veri
+</span>
+
+</div>
+
+<div id="miniLeaderboard"></div>
+
+</div>
+
+
+<div class="panel">
+
+<div class="panel-title">
+
+<strong>
+Rozetler
+</strong>
+
+<span>
+İlerlemeni takip et
+</span>
+
 </div>
 
 <div class="badges">
 
-<div class="badge-card">
-<span>🔥</span>
-<b>Seri Başlangıcı</b>
-<small>3 gün üst üste</small>
+<div class="badge">
+<div class="badge-icon">📷</div>
+<strong>İlk Adım</strong>
+<small>İlk challenge'a katıl</small>
 </div>
 
-<div class="badge-card">
-<span>📸</span>
-<b>Foto Avcısı</b>
-<small>10 challenge</small>
+<div class="badge">
+<div class="badge-icon">🔥</div>
+<strong>Seri</strong>
+<small>Günlük seriye başla</small>
 </div>
 
-<div class="badge-card">
-<span>⚡</span>
-<b>Hızlı Başlangıç</b>
-<small>İlk gün katıl</small>
+<div class="badge">
+<div class="badge-icon">🌙</div>
+<strong>Gece Kuşu</strong>
+<small>Gece challenge'ı</small>
 </div>
 
-<div class="badge-card">
-<span>🏆</span>
-<b>Şampiyon</b>
-<small>1.000 XP</small>
+<div class="badge">
+<div class="badge-icon">🏆</div>
+<strong>Topluluk</strong>
+<small>Etkinliklere katıl</small>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- KEŞFET -->
+
+<section
+id="discover"
+class="page">
+
+<div class="section-head">
+
+<div>
+<h2>Challenge'ları Keşfet</h2>
+<p>İstediğin görevi bul.</p>
+</div>
+
+</div>
+
+
+<div class="search-row">
+
+<input
+id="search"
+class="search"
+placeholder="Challenge ara..."
+oninput="filterChallenges()">
+
+<select
+id="category"
+class="select"
+onchange="filterChallenges()">
+
+<option value="all">
+Tüm kategoriler
+</option>
+
+<option value="doğa">
+Doğa
+</option>
+
+<option value="şehir">
+Şehir
+</option>
+
+<option value="detay">
+Detay
+</option>
+
+</select>
+
+</div>
+
+
+<div
+class="challenge-grid"
+id="discoverGrid">
+</div>
+
+</section>
+
+
+<!-- SIRALAMA -->
+
+<section
+id="ranking"
+class="page">
+
+<div class="section-head">
+
+<div>
+<h2>Haftalık Sıralama</h2>
+<p>Örnek topluluk verileri</p>
+</div>
+
+</div>
+
+<div class="panel">
+
+<div id="fullLeaderboard"></div>
+
+</div>
+
+</section>
+
+
+<!-- ROZETLER -->
+
+<section
+id="badges"
+class="page">
+
+<div class="section-head">
+
+<div>
+<h2>Rozetler</h2>
+<p>İlerledikçe yeni rozetler aç.</p>
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="badges">
+
+<div class="badge">
+<div class="badge-icon">📷</div>
+<strong>İlk Adım</strong>
+<small>İlk challenge</small>
+</div>
+
+<div class="badge">
+<div class="badge-icon">🔥</div>
+<strong>Seri Başlangıcı</strong>
+<small>Günlük seri</small>
+</div>
+
+<div class="badge">
+<div class="badge-icon">🌅</div>
+<strong>Erken Kuş</strong>
+<small>Sabah challenge'ı</small>
+</div>
+
+<div class="badge">
+<div class="badge-icon">🌙</div>
+<strong>Gece Kuşu</strong>
+<small>Gece challenge'ı</small>
+</div>
+
+<div class="badge">
+<div class="badge-icon">🏆</div>
+<strong>Topluluk</strong>
+<small>5 challenge</small>
+</div>
+
+<div class="badge">
+<div class="badge-icon">⭐</div>
+<strong>Fotoğrafçı</strong>
+<small>500 XP</small>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROFİL -->
+
+<section
+id="profile"
+class="page">
+
+<div class="profile-card">
+
+<div class="panel">
+
+<div class="profile-top">
+
+<div
+class="big-avatar"
+id="bigAvatar">
+M
+</div>
+
+<div style="flex:1">
+
+<h2 id="profileName">
+Misafir
+</h2>
+
+<div class="level">
+
+Seviye
+<span id="level">
+1
+</span>
+
+·
+
+<span id="profileXP">
+0
+</span>
+XP
+
+</div>
+
+<div class="progress">
+
+<span id="progressBar"></span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+class="notification-permission">
+
+<strong>
+🔔 Bildirimler
+</strong>
+
+<p>
+Yeni challenge'lar ve önemli site bildirimlerinden
+haberdar olmak için tarayıcı bildirimlerini açabilirsin.
+</p>
+
+<button
+class="secondary"
+onclick="enableNotifications()">
+
+Bildirimleri Aç
+
+</button>
+
+</div>
+
+
+<div style="margin-top:20px">
+
+<button
+class="secondary"
+onclick="changeName()">
+
+Kullanıcı Adını Değiştir
+
+</button>
+
+</div>
+
 </div>
 
 </div>
@@ -690,62 +1433,730 @@ Yarın yeni görev
 
 </main>
 
+
 <footer>
-📸 MANZARAHUB • Her gün yeni bir kare.
+
+<strong>MANZARAHUB</strong>
+<br>
+Fotoğrafı keşfet. Kendi açını paylaş.
 <br><br>
-© <span id="year"></span>
+© 2026 MANZARAHUB · Demo sürüm
+
 </footer>
 
-<div class="toast" id="toast"></div>
+
+<div
+class="toast"
+id="toast">
+</div>
+
 
 <script>
 
-document.getElementById("year").textContent =
-new Date().getFullYear();
+/* =========================
+   AYARLAR
+========================= */
 
-function go(id){
+const today =
+new Date().toISOString().slice(0,10);
 
-document.getElementById(id)
-.scrollIntoView({
-behavior:"smooth"
-});
+let xp =
+Number(localStorage.getItem("mh_xp")) || 0;
+
+let streak =
+Number(localStorage.getItem("mh_streak")) || 1;
+
+let username =
+localStorage.getItem("mh_name") || "Misafir";
+
+
+/* =========================
+   SAYFA
+========================= */
+
+function showPage(page,button){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(x =>
+        x.classList.remove("active")
+    );
+
+    document
+    .getElementById(page)
+    .classList.add("active");
+
+    document
+    .querySelectorAll(".nav button")
+    .forEach(x =>
+        x.classList.remove("active")
+    );
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    document
+    .getElementById("nav")
+    .classList.remove("open");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+function toggleMenu(){
+
+    document
+    .getElementById("nav")
+    .classList.toggle("open");
 
 }
 
-function toast(text){
 
-const t=document.getElementById("toast");
+/* =========================
+   BİLDİRİMLER
+========================= */
 
-t.textContent=text;
+function toggleNotifications(){
 
-t.classList.add("show");
+    document
+    .getElementById("notificationBox")
+    .classList.toggle("open");
 
-setTimeout(()=>{
-t.classList.remove("show");
-},2500);
+}
+
+
+async function enableNotifications(){
+
+    if(!("Notification" in window)){
+
+        showToast(
+            "Bu tarayıcı bildirimleri desteklemiyor."
+        );
+
+        return;
+    }
+
+    try{
+
+        const permission =
+        await Notification.requestPermission();
+
+        if(permission === "granted"){
+
+            new Notification(
+                "MANZARAHUB",
+                {
+                    body:
+                    "Bildirimler başarıyla açıldı. Yeni challenge'ları kaçırma!"
+                }
+            );
+
+            showToast(
+                "Bildirimler açıldı ✓"
+            );
+
+        }else{
+
+            showToast(
+                "Bildirim izni verilmedi."
+            );
+
+        }
+
+    }catch(error){
+
+        showToast(
+            "Bildirim açılırken bir sorun oluştu."
+        );
+
+    }
 
 }
 
-function joinChallenge(){
 
-toast("🔥 Challenge'a katıldın! +50 XP");
+/* =========================
+   ANA CHALLENGE
+========================= */
+
+function updateJoinButton(){
+
+    const button =
+    document.getElementById("joinBtn");
+
+    const joined =
+    localStorage.getItem("mh_joined_date");
+
+    if(joined === today){
+
+        button.disabled = true;
+
+        button.textContent =
+        "✓ Bugünkü Challenge'a Katıldın";
+
+        document
+        .getElementById("joinStatus")
+        .textContent = "Katıldın";
+
+    }else{
+
+        button.disabled = false;
+
+        button.textContent =
+        "Challenge'a Katıl · +50 XP";
+
+        document
+        .getElementById("joinStatus")
+        .textContent = "Hazır";
+
+    }
 
 }
+
+
+function joinToday(){
+
+    /*
+      Aynı gün ikinci kez XP kazanmayı engeller.
+    */
+
+    if(
+        localStorage.getItem("mh_joined_date")
+        === today
+    ){
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "mh_joined_date",
+        today
+    );
+
+
+    xp += 50;
+
+    localStorage.setItem(
+        "mh_xp",
+        xp
+    );
+
+
+    streak++;
+
+    localStorage.setItem(
+        "mh_streak",
+        streak
+    );
+
+
+    updateAll();
+
+    showToast(
+        "Challenge'a katıldın · +50 XP"
+    );
+
+
+    if(
+        "Notification" in window &&
+        Notification.permission === "granted"
+    ){
+
+        new Notification(
+            "MANZARAHUB",
+            {
+                body:
+                "Challenge'a katıldın. +50 XP kazandın!"
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================
+   DİĞER CHALLENGE'LAR
+========================= */
+
+function joinExtra(button,title){
+
+    const saved =
+    JSON.parse(
+        localStorage.getItem("mh_extra")
+        || "[]"
+    );
+
+    if(saved.includes(title)){
+
+        button.disabled = true;
+        button.textContent = "✓ Katıldın";
+
+        return;
+
+    }
+
+    saved.push(title);
+
+    localStorage.setItem(
+        "mh_extra",
+        JSON.stringify(saved)
+    );
+
+    button.disabled = true;
+
+    button.textContent =
+    "✓ Katıldın";
+
+    showToast(
+        title + " challenge'ına katıldın"
+    );
+
+}
+
+
+/* =========================
+   CHALLENGE VERİLERİ
+========================= */
+
+const challenges = [
+
+{
+title:"Gökyüzünün Tonları",
+category:"doğa",
+description:"Gökyüzünü farklı bir açıdan yakala.",
+xp:40,
+time:"2 gün"
+},
+
+{
+title:"Gece Işıkları",
+category:"şehir",
+description:"Şehrin gece atmosferini keşfet.",
+xp:40,
+time:"1 gün"
+},
+
+{
+title:"Yakından Bak",
+category:"detay",
+description:"Günlük hayattaki küçük detayları bul.",
+xp:30,
+time:"3 gün"
+},
+
+{
+title:"Sessiz Sokak",
+category:"şehir",
+description:"Sakin bir sokağın atmosferini yakala.",
+xp:35,
+time:"2 gün"
+},
+
+{
+title:"Doğal Çerçeve",
+category:"doğa",
+description:"Doğadaki doğal çerçeveleri keşfet.",
+xp:45,
+time:"4 gün"
+},
+
+{
+title:"Bir Detay",
+category:"detay",
+description:"Herkesin fark etmediği küçük bir şeyi bul.",
+xp:35,
+time:"2 gün"
+}
+
+];
+
+
+function renderChallenges(){
+
+    const grid =
+    document.getElementById(
+        "discoverGrid"
+    );
+
+    grid.innerHTML = "";
+
+    challenges.forEach(item => {
+
+        const article =
+        document.createElement("article");
+
+        article.className =
+        "challenge";
+
+        article.dataset.category =
+        item.category;
+
+        article.dataset.title =
+        item.title.toLowerCase();
+
+        article.innerHTML = `
+
+        <div class="cover"></div>
+
+        <div class="challenge-body">
+
+        <div class="tag">
+        ${item.category}
+        </div>
+
+        <h3>
+        ${item.title}
+        </h3>
+
+        <p>
+        ${item.description}
+        </p>
+
+        <div class="challenge-footer">
+
+        <span>
+        +${item.xp} XP · ${item.time}
+        </span>
+
+        <button
+        class="small"
+        onclick="joinExtra(this,'${item.title}')">
+        Katıl
+        </button>
+
+        </div>
+
+        </div>
+        `;
+
+        grid.appendChild(article);
+
+    });
+
+    restoreExtra();
+
+}
+
+
+function restoreExtra(){
+
+    const saved =
+    JSON.parse(
+        localStorage.getItem("mh_extra")
+        || "[]"
+    );
+
+    document
+    .querySelectorAll(
+        "#discoverGrid .challenge"
+    )
+    .forEach(card => {
+
+        const title =
+        card.querySelector("h3")
+        .textContent;
+
+        const button =
+        card.querySelector("button");
+
+        if(saved.includes(title)){
+
+            button.disabled = true;
+
+            button.textContent =
+            "✓ Katıldın";
+
+        }
+
+    });
+
+}
+
+
+function filterChallenges(){
+
+    const query =
+    document
+    .getElementById("search")
+    .value
+    .toLowerCase();
+
+    const category =
+    document
+    .getElementById("category")
+    .value;
+
+    document
+    .querySelectorAll(
+        "#discoverGrid .challenge"
+    )
+    .forEach(card => {
+
+        const title =
+        card.dataset.title;
+
+        const cat =
+        card.dataset.category;
+
+        const searchMatch =
+        title.includes(query);
+
+        const categoryMatch =
+        category === "all"
+        || category === cat;
+
+        card.style.display =
+        searchMatch && categoryMatch
+        ? ""
+        : "none";
+
+    });
+
+}
+
+
+/* =========================
+   SIRALAMA
+========================= */
+
+const leaderboard = [
+
+["01","Atlas","1.240 XP"],
+["02","Mira","1.090 XP"],
+["03","Deniz","980 XP"],
+["04","Ege","870 XP"],
+["05","Lina","790 XP"]
+
+];
+
+
+function leaderboardHTML(){
+
+    return leaderboard.map(
+        person => `
+
+        <div class="leader">
+
+        <div class="rank">
+        ${person[0]}
+        </div>
+
+        <div class="leader-avatar">
+        ${person[1][0]}
+        </div>
+
+        <div class="leader-info">
+
+        <strong>
+        ${person[1]}
+        </strong>
+
+        <small>
+        Fotoğrafçı
+        </small>
+
+        </div>
+
+        <div class="leader-xp">
+        ${person[2]}
+        </div>
+
+        </div>
+
+        `
+    ).join("");
+
+}
+
+
+function renderLeaderboard(){
+
+    document
+    .getElementById(
+        "miniLeaderboard"
+    )
+    .innerHTML =
+    leaderboardHTML();
+
+    document
+    .getElementById(
+        "fullLeaderboard"
+    )
+    .innerHTML =
+    leaderboardHTML();
+
+}
+
+
+/* =========================
+   PROFİL
+========================= */
+
+function updateProfile(){
+
+    const first =
+    username
+    .charAt(0)
+    .toUpperCase();
+
+    const level =
+    Math.floor(xp / 100) + 1;
+
+    const progress =
+    xp % 100;
+
+
+    document.getElementById(
+        "headerName"
+    ).textContent =
+    username;
+
+    document.getElementById(
+        "headerAvatar"
+    ).textContent =
+    first;
+
+    document.getElementById(
+        "bigAvatar"
+    ).textContent =
+    first;
+
+    document.getElementById(
+        "profileName"
+    ).textContent =
+    username;
+
+    document.getElementById(
+        "headerXP"
+    ).textContent =
+    xp;
+
+    document.getElementById(
+        "profileXP"
+    ).textContent =
+    xp;
+
+    document.getElementById(
+        "level"
+    ).textContent =
+    level;
+
+    document.getElementById(
+        "levelStat"
+    ).textContent =
+    level;
+
+    document.getElementById(
+        "xpStat"
+    ).textContent =
+    xp;
+
+    document.getElementById(
+        "streakStat"
+    ).textContent =
+    streak;
+
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+    progress + "%";
+
+}
+
 
 function changeName(){
 
-const n=prompt("Profil adın:");
+    const newName =
+    prompt(
+        "Yeni kullanıcı adın:",
+        username
+    );
 
-if(n && n.trim()){
+    if(!newName){
+        return;
+    }
 
-document.getElementById("name").textContent =
-n.trim().slice(0,18);
+    const clean =
+    newName
+    .trim()
+    .slice(0,20);
 
-toast("👤 Profil adı güncellendi");
+    if(!clean){
+        return;
+    }
+
+    username = clean;
+
+    localStorage.setItem(
+        "mh_name",
+        username
+    );
+
+    updateProfile();
+
+    showToast(
+        "Kullanıcı adı güncellendi ✓"
+    );
 
 }
 
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast =
+    document.getElementById("toast");
+
+    toast.textContent =
+    message;
+
+    toast.classList.add("show");
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },2500);
+
 }
+
+
+/* =========================
+   GENEL GÜNCELLEME
+========================= */
+
+function updateAll(){
+
+    updateProfile();
+
+    updateJoinButton();
+
+    renderChallenges();
+
+    renderLeaderboard();
+
+}
+
+
+/* =========================
+   BAŞLANGIÇ
+========================= */
+
+updateAll();
 
 </script>
 
